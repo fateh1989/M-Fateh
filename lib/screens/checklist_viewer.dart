@@ -21,37 +21,37 @@ class _ChecklistViewerState extends State<ChecklistViewer> {
 
   Map<String, Checklist> checklists = {};
 
-  final Map<String, String> defaultChecklist = {
+  Map<String, String> get defaultChecklist => {
     "Preflight": """
-      #Pack
-      Water
-      USB Battery
+      #${"Pack".tr()}
+      ${"Water".tr()}
+      ${"USB Battery".tr()}
 
-      #Plan Flight
-      Briefed & Setup
-      Check Weather
+      #${"Plan Flight".tr()}
+      ${"Briefed & Setup".tr()}
+      ${"Check Weather".tr()}
 
-      #Inspect Motor
-      Throttle Action
-      Airbox Tight
-      Exhaust Springs & Brackets
-      Reserve Pins & Bridle
+      #${"Inspect Motor".tr()}
+      ${"Throttle Action".tr()}
+      ${"Airbox Tight".tr()}
+      ${"Exhaust Springs & Brackets".tr()}
+      ${"Reserve Pins & Bridle".tr()}
 
-      #Prep Wing
-      A's on top
-      Stabilo on Outside
-      Toggles to Pullies
-      Trims to Launch Setting
+      #${"Prep Wing".tr()}
+      ${"A's on top".tr()}
+      ${"Stabilo on Outside".tr()}
+      ${"Toggles to Pullies".tr()}
+      ${"Trims to Launch Setting".tr()}
     """,
     "Landing": """
-      #Gear
-      Buckles
-      Luggage
-      Trims
+      #${"Gear".tr()}
+      ${"Buckles".tr()}
+      ${"Luggage".tr()}
+      ${"Trims".tr()}
 
-      #Plan Approach
-      Measure Wind
-      Check for Powerlines
+      #${"Plan Approach".tr()}
+      ${"Measure Wind".tr()}
+      ${"Check for Powerlines".tr()}
     """,
   };
 
@@ -101,7 +101,7 @@ class _ChecklistViewerState extends State<ChecklistViewer> {
                 DropdownMenu<String>(
                     width: 120,
                     initialSelection: curChecklist,
-                    dropdownMenuEntries: checklists.keys.map((e) => DropdownMenuEntry(value: e, label: e)).toList(),
+                    dropdownMenuEntries: checklists.keys.map((e) => DropdownMenuEntry(value: e, label: e.tr())).toList(),
                     textStyle: Theme.of(context).textTheme.bodyLarge,
                     onSelected: (value) {
                       setState(() {
