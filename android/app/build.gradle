@@ -73,7 +73,10 @@ android {
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            // Use the private release keystore when available.
+            // CI/test builds fall back to Android's debug signing so an
+            // installable APK can be produced without publishing secrets.
+            signingConfig keystorePropertiesFile.exists() ? signingConfigs.release : signingConfigs.debug
         }
     }
 
