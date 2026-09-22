@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -220,7 +221,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: isOptional,
-        title: const Text("Edit Profile"),
+        title: Text("Edit Profile".tr()),
         actions: [
           isProcessing
               ? const Center(
@@ -237,7 +238,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
                       accept(context, isOptional);
                     } else if (inputImage == null) {
                       setState(() {
-                        avatarErrorText = "Required";
+                        avatarErrorText = "Required".tr();
                       });
                     }
                   },
@@ -293,7 +294,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
                         isFocused: cropperFocus.hasFocus,
                         decoration: InputDecoration(
                           errorText: avatarErrorText,
-                          label: const Text("Avatar *"),
+                          label: Text("Avatar *".tr()),
                           border: const OutlineInputBorder(),
                         ),
                         child: ClipRect(
@@ -346,15 +347,15 @@ class _ProfileEditorState extends State<ProfileEditor> {
                                     children: [
                                       Container(),
                                       ElevatedButton.icon(
-                                          label: const Text("Import"),
+                                          label: Text("Import".tr()),
                                           onPressed: pickGallery,
                                           icon: const Icon(Icons.collections)),
                                       ElevatedButton.icon(
-                                          label: const Text("Camera"),
+                                          label: Text("Camera".tr()),
                                           onPressed: pickCamera,
                                           icon: const Icon(Icons.photo_camera)),
                                       ElevatedButton.icon(
-                                          label: const Text("Color"),
+                                          label: Text("Color".tr()),
                                           onPressed: () => pickColor(context),
                                           icon: const Icon(Icons.palette)),
                                       Container(),
