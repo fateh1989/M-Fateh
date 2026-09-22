@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 enum LanguageOverride {
   none,
   english,
-  arabic,
   russian,
   hungarian,
+  arabic,
 }
 
 const Map<LanguageOverride, String> languageNames = {
