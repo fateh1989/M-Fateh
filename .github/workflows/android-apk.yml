@@ -56,6 +56,14 @@ jobs:
         with:
           path: ~/.android/debug.keystore
           key: mfateh-debug-signing-v1
+      - name: Force release signing to use the stable Build 11 key
+        run: |
+          cat > android/key.properties <<EOF
+          storePassword=android
+          keyPassword=android
+          keyAlias=androiddebugkey
+          storeFile=$HOME/.android/debug.keystore
+          EOF
       - name: Build APK
         run: flutter build apk --release
       - name: Verify APK identity and signature
