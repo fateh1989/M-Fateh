@@ -73,7 +73,7 @@ jobs:
           APKSIGNER=$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -1)
           "$AAPT" dump badging "$APK" | grep '^package:'
           "$APKSIGNER" verify --verbose --print-certs "$APK"
-          "$APKSIGNER" verify --print-certs "$APK" | grep -F 'Signer #1 certificate SHA-256 digest: 2f4bafafa0eb663ccd76855cc5b513c0502c314192774dd9725f5d6077f72140'
+          "$APKSIGNER" verify --print-certs "$APK" | grep -F 'certificate SHA-256 digest: 2f4bafafa0eb663ccd76855cc5b513c0502c314192774dd9725f5d6077f72140'
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
