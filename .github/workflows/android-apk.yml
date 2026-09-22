@@ -31,6 +31,24 @@ jobs:
           final Endpoint reflectorNorthAmerica =
               Endpoint(apiUrl: 'unset', token: 'unset', cert: 'unset');
           EOF
+      # Keep one debug signing key across CI runs. Without this, each fresh
+      # GitHub runner creates a different key and Android refuses the next APK
+      # as an update ("App not installed").
+      - name: Restore stable test signing key
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: mfateh-debug-signing-v1
+      - name: Ensure test signing key exists
+        run: |
+          mkdir -p ~/.android
+          if [ ! -f ~/.android/debug.keystore ]; then
+            keytool -genkeypair -v \
+              -keystore ~/.android/debug.keystore \
+              -storepass android -alias androiddebugkey -keypass android \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=M-Fateh Test,O=M-Fateh,C=SE"
+          fi
       - name: Build APK
         run: flutter build apk --release
       - name: Upload APK
