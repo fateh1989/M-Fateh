@@ -240,7 +240,7 @@ class XCNav extends StatelessWidget {
       locale: context.locale,
       navigatorObservers:
           settingsMgr.rumOptOut.value ? [] : [DatadogNavigationObserver(datadogSdk: DatadogSdk.instance)],
-      title: 'xcNav',
+      title: 'M-Fateh',
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
         useMaterial3: false,
