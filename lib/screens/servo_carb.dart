@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'package:xcnav/servo_carb_service.dart';
@@ -67,7 +68,7 @@ class _ServoCarbState extends State<ServoCarb> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Load Preset",
+                    "Load Preset".tr(),
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const Text(
