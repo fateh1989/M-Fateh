@@ -18,6 +18,19 @@ jobs:
         run: flutter pub get
       - name: Locale tests
         run: flutter test test/locale_test.dart
+      - name: Create open-source build secrets
+        run: |
+          cat > lib/secrets.dart <<'EOF'
+          import 'package:xcnav/endpoint.dart';
+
+          const String datadogToken = 'unset';
+          const String datadogRumAppId = 'unset';
+          const String profileStoreUrl = 'unset';
+          const String profileStoreToken = 'unset';
+
+          final Endpoint reflectorNorthAmerica =
+              Endpoint(apiUrl: 'unset', token: 'unset', cert: 'unset');
+          EOF
       - name: Build APK
         run: flutter build apk --release
       - name: Upload APK
