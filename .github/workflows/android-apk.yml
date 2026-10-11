@@ -5,6 +5,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  actions: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -51,6 +55,20 @@ jobs:
           fi
       - name: Build APK
         run: flutter build apk --release
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_NAME: M-Fateh-APK
+        run: |
+          set -euo pipefail
+          artifact_rows="$(gh api --paginate "/repos/${GITHUB_REPOSITORY}/actions/artifacts?per_page=100" --jq '.artifacts[] | [.id, .name] | @tsv')"
+          while IFS=$'\t' read -r artifact_id artifact_name; do
+            [[ -z "$artifact_id" ]] && continue
+            if [[ "$artifact_name" == "$ARTIFACT_NAME" ]]; then
+              gh api --method DELETE "/repos/${GITHUB_REPOSITORY}/actions/artifacts/$artifact_id" >/dev/null
+              echo "Deleted previous artifact $artifact_id ($artifact_name)"
+            fi
+          done <<< "$artifact_rows"
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
