@@ -55,6 +55,7 @@ jobs:
           fi
       - name: Build APK
         run: flutter build apk --release
+      - name: Remove previous artifact before upload
         if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
