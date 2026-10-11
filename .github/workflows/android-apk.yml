@@ -55,5 +55,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: M-Fateh-APK
-          retention-days: 1
+          retention-days: 7
           path: build/app/outputs/flutter-apk/app-release.apk
